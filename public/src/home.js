@@ -56,7 +56,9 @@ newResult.push({name: borrows, count: borrowsCount})
 
 function getMostPopularAuthors(books, authors) {
 const authorCounts = [];
-  
+     function addAuthor(author, count) {
+    authorCounts.push({ name: `${author.name.first} ${author.name.last}`, count });
+}
 for (const author of authors) {
 let count = 0;
 
@@ -65,7 +67,7 @@ if (book.authorId === author.id) {
 count += book.borrows.length;
 }
 } 
- authorCounts.push({ name: `${author.name.first} ${author.name.last}`, count });
+ addAuthor(author, count)
 }
   const sortedAuthors = authorCounts.sort((a, b) => b.count - a.count).slice(0, 5)
   const result = sortedAuthors.map((author) => ({ name: author.name, count: author.count }));
